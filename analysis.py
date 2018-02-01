@@ -1,41 +1,33 @@
-import pandas as pd
-import numpy as np
-from openpyxl import load_workbook
+import pandas
+import numpy
 import xlrd
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 
-plt.style.use('ggplot')
+from openpyxl import load_workbook
+
+# plt.style.use('ggplot')
 
 myfile = "FinancialSample.xlsx"
-
-
 path = r'/home/suraj/Desktop/akpsi-workshop/FinancialSample.xlsx'
 
-print("Reading Data...")
+def writeToSheet():
+    writer = pd.ExcelWriter(path, engine='openpyxl')
+    book = load_workbook(path)
+    writer.book = book
+    writer.sheets = dict((ws.title, ws) for ws in book.worksheets)
+    data_df.to_excel(writer, sheet_name='Sheet2')
+    writer.save()
 
-df = pd.read_excel(myfile, 'Sheet1')
-# print(df.head())
+def firstFunc():
+    
+    df = pandas.read_excel(myfile, 'Sheet1')
 
-# plt.figure()
-
-# print(df.mean())
-
-data_df = df.iloc[:,0:2]
-
-
-# df['Units Sold'][1:100].plot()
-# plt.show()
-
-# plt.show()
-# print(df.)
-
-# print(df.cumsum().plot())
+    data_df = df.iloc[:,0:2]
+        
+    df['Sum'] = df['Units Sold']
+    print(df['Sum'].mean())
+    # print(df.head())
+    # print(data_df)
 
 
-# in all functions - writes to a new sheet using the dataframe created in function
-writer = pd.ExcelWriter(path, engine='openpyxl')
-book = load_workbook(path)
-writer.book = book
-writer.sheets = dict((ws.title, ws) for ws in book.worksheets)
-data_df.to_excel(writer, sheet_name='Sheet2')
-writer.save()
+firstFunc()
