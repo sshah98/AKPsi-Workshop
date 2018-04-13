@@ -1,2 +1,0 @@
-repl.it - online version of python 
-anaconda.com/download - download anaconda
